@@ -15,9 +15,10 @@ node {
                 def mvnHome = tool name: 'M2' , type: 'maven'
                 sh "${mvnHome}/bin/mvn package"
 }
-  stage('push'){
-
-pushToCloudFoundry cloudSpace: 'development', credentialsId: 'pcf_login', organization: 'practice777', target: 'api.run.pivptal.io'
+  stage('install'){
+              def mvnHome = tool name: 'M2' , type: 'maven'
+              sh "${mvnHome}/bin/mvn install"
+              pushToCloudFoundry cloudSpace: 'development', credentialsId: 'pcf_login', organization: 'practice777', target: 'api.run.pivotal.io'
 }
 
 }
